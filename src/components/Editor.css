@@ -1,0 +1,147 @@
+/* Layout container aligning everything to top */
+.layout-container {
+  display: flex;
+  height: 100vh;
+  background: #ffffff; /* Changed from #f9fafb to pure white */
+}
+
+/* Sidebar for user tags */
+.sidebar {
+  width: 200px;
+  background: #f3f4f6;
+  padding: 1rem;
+  border-right: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+}
+.editor-dark-theme {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+/* Sidebar header */
+.sidebar h3 {
+  font-size: 16px;
+  margin-bottom: 1rem;
+  color: #1f2937;
+}
+
+/* User presence label */
+.user-tag {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1f2937;
+}
+
+.color-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+/* Main editor section */
+.editor-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Push content to top */
+  padding: 2rem;
+  background-color: #ffffff;
+}
+
+/* Header above editor */
+.editor-header {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #1f2937;
+}
+
+/* Editor box styling */
+.editor-wrapper {
+  width: 100%;
+  max-width: 700px;
+  height: 400px;
+  padding: 1rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow-y: auto;
+}
+
+/* TipTap editor content */
+.tiptap {
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+  line-height: 1.5;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  caret-color: black;
+  color: #111827; /* Deep gray for readability */
+}
+
+.tiptap:focus {
+  outline: none;
+}
+
+.collaboration-cursor__caret {
+  border-left: 2px solid;
+  margin-left: -1px;
+  height: 1.2em;
+  position: relative;
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+.collaboration-cursor__label {
+  position: absolute;
+  top: -1.4em;
+  left: -1px;
+  font-size: 12px;
+  background-color: var(--label-bg, #facc15);
+  color: black;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+  white-space: nowrap;
+  z-index: 11;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.collaboration-cursor__caret {
+  border-left: 2px solid;
+  margin-left: -1px;
+  height: 1.2em;
+  position: relative;
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+.collaboration-cursor__label {
+  position: absolute;
+  top: -1.4em;
+  left: -1px;
+  font-size: 12px;
+  background-color: var(--label-bg, #facc15);
+  color: black;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+  white-space: nowrap;
+  z-index: 11;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
