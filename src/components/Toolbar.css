@@ -1,14 +1,14 @@
-/* src/components/Toolbar.css */
-
 .toolbar {
   display: flex;
-  gap: 12px;
-  background-color: #f3f4f6; /* Tailwind gray-100 */
+  gap: 12px; 
+  background-color: #f3f4f6;
   padding: 8px 16px;
   border-bottom: 1px solid #d1d5db;
 }
 
-.toolbar-btn {
+.toolbar-btn,
+.save-btn {
+  margin-right: 6px;       
   background-color: white;
   border: 1px solid #d1d5db;
   padding: 6px 12px;
@@ -19,4 +19,20 @@
 
 .toolbar-btn:hover {
   background-color: #e5e7eb;
+}
+
+.save-btn {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+}
+
+.save-btn:hover {
+  background-color: #2563eb;
+}
+.save-msg {
+  font-size: 14px;
+  color: green;
+  margin-left: 12px;
+  align-self: center;
 }

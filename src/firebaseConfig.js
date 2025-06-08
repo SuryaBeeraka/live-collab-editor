@@ -1,6 +1,6 @@
 // src/firebaseConfig.js
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore"; // ✅ Import Firestore
+import { getFirestore, enableIndexedDbPersistence } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB478kuAuqFsMZRBd9vnwnGIBbNFK7Hc84",
@@ -12,6 +12,11 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app); // ✅ Initialize Firestore
+const db = getFirestore(app);
 
-export { app, db }; // ✅ Export `db`
+// ✅ Enable persistence before any db use
+enableIndexedDbPersistence(db).catch((err) => {
+  console.error("IndexedDB persistence failed:", err.code);
+});
+
+export { app, db };

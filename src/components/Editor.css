@@ -42,7 +42,13 @@ html, body {
   font-weight: 500;
   color: #1f2937;
 }
-
+.save-status {
+  color: #9ca3af;
+  font-size: 0.875rem;
+  text-align: right;
+  margin-right: 1rem;
+  margin-top: 0.25rem;
+}
 .color-dot {
   width: 10px;
   height: 10px;

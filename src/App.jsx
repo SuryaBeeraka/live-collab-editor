@@ -13,22 +13,54 @@ function App() {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      console.log("Auth state changed. User:", firebaseUser?.email);
       setUser(firebaseUser);
     });
-    return () => unsubscribe();
+    return () => unsubscribe(); // Cleanup listener
   }, []);
 
+  // Optional full-screen loading UI
   if (user === undefined) {
-    // You can show a loading spinner here if desired
-    return <div>Loading...</div>;
+    return (
+      <div
+        style={{
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          fontSize: "1.5rem",
+        }}
+      >
+        Loading...
+      </div>
+    );
   }
 
   return (
     <Routes>
-      <Route path="/login" element={user ? <Navigate to="/dashboard" /> : <Login />} />
-      <Route path="/" element={<Navigate to={user ? "/dashboard" : "/login"} />} />
-      <Route path="/dashboard" element={user ? <Dashboard user={user} /> : <Navigate to="/login" />} />
-      <Route path="/editor" element={user ? <Editor user={user} /> : <Navigate to="/login" />} />
+      {/* Redirect to dashboard if already logged in */}
+      <Route
+        path="/login"
+        element={user ? <Navigate to="/dashboard" replace /> : <Login />}
+      />
+
+      {/* Root route redirects based on login */}
+      <Route
+        path="/"
+        element={<Navigate to={user ? "/dashboard" : "/login"} replace />}
+      />
+
+      {/* Dashboard (requires login) */}
+      <Route
+        path="/dashboard"
+        element={user ? <Dashboard user={user} /> : <Navigate to="/login" replace />}
+      />
+
+      {/* Editor (requires login) */}
+      <Route
+        path="/editor/:docId"
+        element={user ? <Editor user={user} /> : <Navigate to="/login" replace />}
+      />
     </Routes>
   );
 }

@@ -1,5 +1,3 @@
-/* src/pages/Dashboard.css */
-
 .dashboard {
   display: flex;
   flex-direction: column;
@@ -9,6 +7,7 @@
   background-color: #f9fafb;
 }
 
+/* Header with logo and user avatar */
 .dashboard-header {
   width: 100%;
   display: flex;
@@ -30,41 +29,97 @@
   border-radius: 50%;
 }
 
+/* Content section: stacked layout */
 .dashboard-content {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.dashboard-box {
-  width: 300px;
-  height: 150px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  cursor: pointer;
+  gap: 1rem;
+}
+
+/* Each document card */
+.dashboard-box {
+  width: 320px;
+  min-height: 80px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
   transition: transform 0.2s ease;
+  cursor: pointer;
 }
 
 .dashboard-box:hover {
   transform: scale(1.02);
 }
 
+/* File icon */
+.icon {
+  font-size: 24px;
+  margin-right: 0.75rem;
+}
+
+/* Title text with ellipsis */
+.doc-title {
+  flex-grow: 1;
+  font-weight: bold;
+  color: goldenrod;
+  font-size: 1rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
+/* Delete button */
+.delete-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  color: red;
+  cursor: pointer;
+}
+
+/* Create new document button */
 .create-btn {
-  margin-top: 0.5rem;
   background-color: #3b82f6;
   color: white;
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 6px;
-  cursor: pointer;
   font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
 .create-btn:hover {
   background-color: #2563eb;
+}
+
+.shared-section {
+  margin-top: 2rem;
+  width: 60%;
+}
+
+.invite-box {
+  background: #fefce8;
+  border: 1px solid #fde68a;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.invite-box button {
+  background-color: #22c55e;
+  border: none;
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
 }

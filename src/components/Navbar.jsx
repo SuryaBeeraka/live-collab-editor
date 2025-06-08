@@ -1,68 +1,65 @@
 // src/components/Navbar.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { logoutUser } from "../auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { updateDocTitle } from "../firestore";
 import "./Navbar.css";
 
-const Navbar = ({ user }) => {
+const Navbar = ({ user, title }) => {
   const [showMenu, setShowMenu] = useState(false);
-  const [isEditingTitle, setIsEditingTitle] = useState(false);
-  const [docTitle, setDocTitle] = useState("Untitled");
+  const [docTitle, setDocTitle] = useState(title || "Untitled");
+  const [editing, setEditing] = useState(false);
   const navigate = useNavigate();
+  const { docId } = useParams();
+
+  useEffect(() => {
+    setDocTitle(title || "Untitled");
+  }, [title]);
 
   const handleLogout = async () => {
     await logoutUser();
-    navigate("/");
+    navigate("/login");
   };
 
-  const getInitial = (name) => name?.charAt(0)?.toUpperCase() || "?";
-
-  const handleTitleClick = () => setIsEditingTitle(true);
-
-  const handleTitleBlur = () => {
-    if (docTitle.trim() === "") setDocTitle("Untitled");
-    setIsEditingTitle(false);
-  };
-
-  const handleTitleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      handleTitleBlur();
+  const handleBlur = async () => {
+    setEditing(false);
+    const trimmed = docTitle.trim();
+    if (trimmed && trimmed !== title) {
+      await updateDocTitle(docId, trimmed);
     }
   };
 
   return (
     <div className="navbar">
-      <div
-        className="logo"
-        onClick={() => navigate("/dashboard")}
-        style={{ cursor: "pointer" }}
-      >
-        ⚡ LiveDocs
+      <div className="logo" onClick={() => navigate("/dashboard")}>
+        ⚡ <span className="logo-text">LiveDocs</span>
       </div>
 
-      <div className="doc-title">
-        {isEditingTitle ? (
+      <div className="doc-title" onClick={() => setEditing(true)}>
+        {editing ? (
           <input
             className="title-input"
             value={docTitle}
             autoFocus
             onChange={(e) => setDocTitle(e.target.value)}
-            onBlur={handleTitleBlur}
-            onKeyDown={handleTitleKeyDown}
+            onBlur={handleBlur}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") e.target.blur();
+            }}
           />
         ) : (
-          <span onClick={handleTitleClick}>
-            {docTitle} <span role="img" aria-label="edit">✏️</span>
-          </span>
+          <>
+            <span>{docTitle}</span> ✏️
+          </>
         )}
       </div>
 
       <div className="profile-section">
         <div className="profile-avatar" onClick={() => setShowMenu(!showMenu)}>
-          {user?.photoURL ? (
+          {user.photoURL ? (
             <img src={user.photoURL} alt="avatar" />
           ) : (
-            <span>{getInitial(user?.displayName || user?.email)}</span>
+            <span>{user.displayName?.[0]?.toUpperCase() || user.email?.[0]?.toUpperCase()}</span>
           )}
         </div>
         {showMenu && (
