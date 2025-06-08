@@ -2,9 +2,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem;
-  min-height: 100vh;
   background-color: #f9fafb;
+  min-height: 100vh;
+  padding-top: 0; 
 }
 
 /* Header with logo and user avatar */
@@ -31,10 +31,13 @@
 
 /* Content section: stacked layout */
 .dashboard-content {
+  margin-top: 2rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 1rem;
+  width: 100%;
+  max-width: 600px;
+  align-items: center;
 }
 
 /* Each document card */
@@ -123,3 +126,4 @@
   border-radius: 6px;
   cursor: pointer;
 }
+

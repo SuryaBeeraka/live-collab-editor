@@ -1,0 +1,15 @@
+services:
+  client:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - yjs-server
+    environment:
+      - VITE_YJS_WS=ws://yjs-server:1234  # 👈 Use service name, not localhost
+
+  yjs-server:
+    build:
+      context: ./y-websocket
+    ports:
+      - "1234:1234"

@@ -4,14 +4,18 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"vite\" \"node ../y-websocket/src/y-websocket.js\""
+    "dev": "concurrently \"vite\" \"node ../y-websocket/src/y-websocket.js\"",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@tiptap/extension-collaboration": "^2.12.0",
     "@tiptap/extension-collaboration-cursor": "^2.12.0",
     "@tiptap/react": "^2.12.0",
     "@tiptap/starter-kit": "^2.12.0",
+    "file-saver": "^2.0.5",
     "firebase": "^11.8.1",
+    "jspdf": "^3.0.1",
     "lodash.debounce": "^4.0.8",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

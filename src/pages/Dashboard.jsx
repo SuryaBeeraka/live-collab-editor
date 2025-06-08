@@ -3,8 +3,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchUserDocs, createNewDoc, deleteDocById } from "../firestore";
 import { v4 as uuidv4 } from "uuid";
-import "./Dashboard.css";
 import Invites from "../components/Invites";
+import Navbar from "../components/Navbar";
+import "./Dashboard.css";
 
 const Dashboard = ({ user }) => {
   const navigate = useNavigate();
@@ -14,7 +15,6 @@ const Dashboard = ({ user }) => {
   const loadDocs = async () => {
     try {
       const docs = await fetchUserDocs(user.uid);
-      console.log("Fetched documents:", docs);
       setDocs(docs);
     } catch (err) {
       console.error("Failed to fetch user docs:", err);
@@ -45,12 +45,7 @@ const Dashboard = ({ user }) => {
 
   return (
     <div className="dashboard">
-      <div className="dashboard-header">
-        <div className="dashboard-logo" onClick={() => navigate("/dashboard")}>⚡ LiveDocs</div>
-        <div className="dashboard-user">
-          <img src={user?.photoURL} alt="avatar" className="avatar" />
-        </div>
-      </div>
+      <Navbar user={user} title={null} /> {/* Hide document title input */}
 
       <div className="dashboard-content">
         <div className="dashboard-box" onClick={handleCreateNew}>
@@ -85,7 +80,6 @@ const Dashboard = ({ user }) => {
         )}
       </div>
 
-      {/* Shared with Me Section */}
       <Invites user={user} />
     </div>
   );

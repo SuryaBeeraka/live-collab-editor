@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import * as Y from "yjs";
 import { WebsocketProvider } from "y-websocket";
 import { EditorContent, useEditor } from "@tiptap/react";
@@ -11,6 +11,8 @@ import Toolbar from "./Toolbar";
 import CollabInvite from "./CollabInvite";
 import "./Editor.css";
 import { saveDocContent, loadDocContent } from "../firestore";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebaseConfig";
 import debounce from "lodash.debounce";
 
 const getRandomColor = () => {
@@ -20,12 +22,10 @@ const getRandomColor = () => {
 
 const Editor = ({ user }) => {
   const { docId } = useParams();
+  const [docTitle, setDocTitle] = useState("Untitled");
 
   const ydoc = useMemo(() => new Y.Doc(), []);
-  const provider = useMemo(
-    () => new WebsocketProvider("ws://localhost:1234", docId, ydoc),
-    [docId, ydoc]
-  );
+  const provider = useMemo(() => new WebsocketProvider("ws://localhost:1234", docId, ydoc), [docId, ydoc]);
 
   const userColor = useMemo(() => getRandomColor(), []);
   const awareness = provider.awareness;
@@ -40,8 +40,17 @@ const Editor = ({ user }) => {
   }, [user, awareness, userColor]);
 
   useEffect(() => {
-    if (docId && ydoc) {
+    const fetchDocTitle = async () => {
+      const snap = await getDoc(doc(db, "documents", docId));
+      if (snap.exists()) {
+        const data = snap.data();
+        if (data?.title) setDocTitle(data.title);
+      }
+    };
+
+    if (docId) {
       loadDocContent(docId, ydoc);
+      fetchDocTitle();
     }
   }, [docId, ydoc]);
 
@@ -88,7 +97,7 @@ const Editor = ({ user }) => {
 
   return (
     <div className="editor-dark-theme">
-      <Navbar user={user} />
+      <Navbar user={user} title={docTitle} />
       <Toolbar editor={editor} onSave={() => saveDocContent(docId, ydoc)} />
       <CollabInvite docId={docId} />
       <div className="editor-box">
