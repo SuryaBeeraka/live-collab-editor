@@ -26,3 +26,8 @@ A real-time collaborative document editor built with:
 	•	Authentication & Storage: Firebase Auth + Firestore
 	•	DevOps: Docker, Docker Compose
 
+---
+## 📦 Scripts
+npm install        # install dependencies
+npm run dev        # start Vite dev server (for client only)
+PORT=1234 npx y-websocket   # run WebSocket server manually (if needed)
