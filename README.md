@@ -18,19 +18,12 @@ A real-time collaborative document editor built with:
 - Collaborative cursors with username and color
 - Auto-save to Firestore (with debouncing)
 - Full Dockerized setup with live-reloading
-
+- 
 ---
 
-## 🛠️ Project Structure
-live-collab-editor/
-├── src/                   # React app codebase
-│   ├── components/        # Navbar, Toolbar, Editor, etc.
-│   ├── pages/             # Dashboard, Login
-│   ├── utils/             # Export helpers
-│   └── firebaseConfig.js  # Firebase setup
-├── y-websocket/           # WebSocket server powered by y-websocket
-│   ├── Dockerfile.yjs     # Custom Dockerfile for y-websocket
-│   └── …
-├── Dockerfile.client      # Dockerfile for React frontend
-├── docker-compose.yml     # Docker Compose setup
-└── README.md              # You’re here!
+## Tech Stack
+	•	Frontend: React, TipTap, Tailwind CSS
+	•	Collaboration: Yjs (CRDT(Conflict-free Replicated Data Types)-powered), y-websocket
+	•	Authentication & Storage: Firebase Auth + Firestore
+	•	DevOps: Docker, Docker Compose
+
