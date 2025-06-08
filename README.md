@@ -20,10 +20,9 @@ A real-time collaborative document editor built with:
 - Full Dockerized setup with live-reloading
 - 
 ---
-
 ## Tech Stack
 	•	Frontend: React, TipTap, Tailwind CSS
-	•	Collaboration: Yjs (CRDT(Conflict-free Replicated Data Types)-powered), y-websocket
+	•	Collaboration: Yjs (Conflict-free Replicated Data Types-powered), y-websocket
 	•	Authentication & Storage: Firebase Auth + Firestore
 	•	DevOps: Docker, Docker Compose
 
