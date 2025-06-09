@@ -1,4 +1,4 @@
-# 📝 Live Collaborative Editor
+# 📝 CollabDocs - Live Collaborative Editor
 
 A real-time collaborative document editor built with:
 
@@ -18,7 +18,6 @@ A real-time collaborative document editor built with:
 - Collaborative cursors with username and color
 - Auto-save to Firestore (with debouncing)
 - Full Dockerized setup with live-reloading
-- 
 ---
 ## Tech Stack
 	•	Frontend: React, TipTap, Tailwind CSS
